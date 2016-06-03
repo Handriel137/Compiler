@@ -15,6 +15,7 @@ public class Parser {
 
     Token currentToken;
     ArrayList<Token> tokens;
+    ArrayList<Node> SyntaxTree = new ArrayList<>();
     int tokenIndex;
 
     public Parser() {
@@ -22,7 +23,7 @@ public class Parser {
         Lexer lex = new Lexer();
         this.tokens = lex.execute();
         tokenIndex = 0;
-
+        
         this.currentToken = tokens.get(0);
 //    System.out.println(currentToken);
 
@@ -111,7 +112,7 @@ public class Parser {
             accept(currentToken, "LEFT_BR");
             parseAssignmentList();
             accept(currentToken, "RIGHT_BR");
-            parseSemicolon();
+//            parseSemicolon();
         }
         else
         {
@@ -225,4 +226,20 @@ public class Parser {
 
     }
 
+    private void addGraphNode(Node nodeID){
+        
+        if(!(SyntaxTree.contains(nodeID)))
+        {
+            SyntaxTree.add(nodeID);    
+            
+        }
+    }
+    
+    private void add_parent_child(Node parent, Node child){
+        addGraphNode(parent);
+        addGraphNode(child);
+        if(!(parent.children.contains(child))){
+            parent.addChild(child);
+        }
+    }
 }

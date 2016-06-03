@@ -6,7 +6,7 @@ digraph G {
             main -> cleanup;
             execute -> make_string;
             init -> make_string;
-            main -> printf [style=bold, label=]; /* missing value */
+            main -> printf [style=bold, label= stuff]; /* missing value */
             make_string [label="make a\nstring"];
             node [shape=box,style=filled,color=".7 .3 1.0"];
             execute -> compare;
