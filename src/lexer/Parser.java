@@ -6,6 +6,7 @@
 package lexer;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  *
@@ -15,7 +16,8 @@ public class Parser {
 
     Token currentToken;
     ArrayList<Token> tokens;
-    ArrayList<Node> SyntaxTree = new ArrayList<>();
+    HashMap<String, Node> createdNodes = new HashMap<>();
+    
     int tokenIndex;
 
     public Parser() {
@@ -226,20 +228,20 @@ public class Parser {
 
     }
 
-    private void addGraphNode(Node nodeID){
+    private void addNode(String nodeName){
         
-        if(!(SyntaxTree.contains(nodeID)))
+        if(!(createdNodes.containsKey((nodeName))))
         {
-            SyntaxTree.add(nodeID);    
-            
+          createdNodes.put(nodeName, new Node(nodeName));
+          
         }
     }
     
-    private void add_parent_child(Node parent, Node child){
-        addGraphNode(parent);
-        addGraphNode(child);
-        if(!(parent.children.contains(child))){
-            parent.addChild(child);
+    private void add_parent_child(String parent, String child){
+        addNode(parent);
+        addNode(child);
+        if(createdNodes.c)){
+            
         }
     }
 }
