@@ -72,7 +72,7 @@ public class Parser {
         } 
         
         else if (currentToken.tokenType.equals("ID")) {
-            nodeName = currentToken.toString();
+            nodeName = currentToken.getValue();
             accept(currentToken, "ID");
             if (currentToken.tokenType.equals("D_EDGEOP") || (currentToken.tokenType.equals("U_EDGEOP"))) {
                 parseEdgeStatement(nodeName);
@@ -178,7 +178,7 @@ public class Parser {
         parseEdgeType();
 
         if (currentToken.tokenType.equals("ID")) {
-            addParentChild(nodeName,currentToken.toString());
+            addParentChild(nodeName,currentToken.getValue());
             accept(currentToken, "ID");
             parseAttributeList();
             
@@ -251,7 +251,8 @@ public class Parser {
         
         //
         if(!(createdNodes.get(parent).children.containsKey(child))){
-            createdNodes.get(parent).addChild(child, createdNodes.get(child));
+            createdNodes.get(parent).children.put(child, createdNodes.get(child));
+//            createdNodes.get(parent).addChild(child, createdNodes.get(child));
         }
     }
     
@@ -270,7 +271,7 @@ public class Parser {
             
             //iterates through each created child
             for(String kid : kids){
-                System.out.println("Children : \n \t"+ kid);
+                System.out.println("\tChildren : "+ kid);
             }
         }
     }
