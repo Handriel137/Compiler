@@ -25,6 +25,6 @@ public class CallParser {
         Parser parser = new Parser();
         
        parser.parseInput();
-        
+       parser.printNodes();
     }
 }

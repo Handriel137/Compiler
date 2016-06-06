@@ -2,6 +2,7 @@
 package lexer;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  *
@@ -9,21 +10,23 @@ import java.util.ArrayList;
  */
 public class Node {
 
-    ArrayList<Node> children;
-
+    HashMap<String, Node> children;
+    String label;
+    
     public Node(String name) {
-        String label = name;
-        children = new ArrayList<Node>(); // All of the attached nodes
+        label = name;
+        children = new HashMap<>(); // All of the attached nodes
 
     }
     
-    public void addChild(Node n){
-        
-        children.add(n);
+    public String getName(){
+        return label;
     }
     
-    public ArrayList<Node> getChildren(Node node) {
-        return node.children;
+    public void addChild(String name, Node n){
+        
+        children.put(name, n);
     }
+    
 
 }

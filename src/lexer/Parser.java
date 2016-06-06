@@ -7,6 +7,7 @@ package lexer;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
 
 /**
  *
@@ -15,6 +16,7 @@ import java.util.HashMap;
 public class Parser {
 
     Token currentToken;
+    String nodeName;
     ArrayList<Token> tokens;
     HashMap<String, Node> createdNodes = new HashMap<>();
     
@@ -67,14 +69,17 @@ public class Parser {
     private void parseStatement() {
         if (currentToken.tokenType.equals("NODE")) {
             parseNodeStatement();
-        } else if (currentToken.tokenType.equals("ID")) {
+        } 
+        
+        else if (currentToken.tokenType.equals("ID")) {
+            nodeName = currentToken.toString();
             accept(currentToken, "ID");
             if (currentToken.tokenType.equals("D_EDGEOP") || (currentToken.tokenType.equals("U_EDGEOP"))) {
-                parseEdgeStatement();
+                parseEdgeStatement(nodeName);
                 parseSemicolon();
             }
             else if(currentToken.tokenType.equals("LEFT_BR")){
-                parseNodeCreation();
+                parseNodeCreation(nodeName);
             }
             
             else if(currentToken.tokenType.equals("EQUALS")){
@@ -109,12 +114,14 @@ public class Parser {
         }
     }
     
-    private void parseNodeCreation(){
+    private void parseNodeCreation(String nodeName){
+        
+        addNode(nodeName);
         if(currentToken.tokenType.equals("LEFT_BR")){
             accept(currentToken, "LEFT_BR");
             parseAssignmentList();
             accept(currentToken, "RIGHT_BR");
-//            parseSemicolon();
+            parseSemicolon();
         }
         else
         {
@@ -167,10 +174,11 @@ public class Parser {
         }
     }
 
-    private void parseEdgeStatement() {
+    private void parseEdgeStatement(String nodeName) {
         parseEdgeType();
 
         if (currentToken.tokenType.equals("ID")) {
+            addParentChild(nodeName,currentToken.toString());
             accept(currentToken, "ID");
             parseAttributeList();
             
@@ -237,11 +245,33 @@ public class Parser {
         }
     }
     
-    private void add_parent_child(String parent, String child){
+    private void addParentChild(String parent, String child){
         addNode(parent);
         addNode(child);
-        if(createdNodes.c)){
+        
+        //
+        if(!(createdNodes.get(parent).children.containsKey(child))){
+            createdNodes.get(parent).addChild(child, createdNodes.get(child));
+        }
+    }
+    
+    public void printNodes(){
+        Set<String> nodes = createdNodes.keySet();
+        
+        //iterates through each created node
+        for(String node : nodes){
             
+            //prints node name
+            System.out.println("Node Name : "+ node);
+            
+           
+            //gets the list of children from the node
+            Set<String> kids = createdNodes.get(node).children.keySet();
+            
+            //iterates through each created child
+            for(String kid : kids){
+                System.out.println("Children : \n \t"+ kid);
+            }
         }
     }
 }

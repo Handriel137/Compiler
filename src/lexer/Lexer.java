@@ -32,7 +32,7 @@ public class Lexer {
 
     public Lexer() {
 
-        result = tokenizer.tokenize("HW2Input.txt");
+        result = tokenizer.tokenize("HW4Input.txt");
         //position counter of string
         index = 0;
         //actual character at location in result
