@@ -3,12 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/ryan.solnik/Documents/NetBeansProjects/Lexer/src/lexer/TokenTypes.java</file>
-            <file>file:/C:/Users/ryan.solnik/Documents/NetBeansProjects/Lexer/src/lexer/Parser.java</file>
-            <file>file:/C:/Users/ryan.solnik/Documents/NetBeansProjects/Lexer/src/lexer/Token.java</file>
-            <file>file:/C:/Users/ryan.solnik/Documents/NetBeansProjects/Lexer/src/lexer/Tokenizer.java</file>
-            <file>file:/C:/Users/ryan.solnik/Documents/NetBeansProjects/Lexer/src/lexer/LinedCharacter.java</file>
-            <file>file:/C:/Users/ryan.solnik/Documents/NetBeansProjects/Lexer/src/lexer/Lexer.java</file>
+            <file>file:/C:/Users/ryan.solnik/Documents/NetBeansProjects/Lexer/src/lexer/Graph.java</file>
+            <file>file:/C:/Users/ryan.solnik/Documents/NetBeansProjects/Lexer/src/lexer/Treewalker.java</file>
+            <file>file:/C:/Users/ryan.solnik/Documents/NetBeansProjects/Lexer/src/lexer/GraphNode.java</file>
             <file>file:/C:/Users/ryan.solnik/Documents/NetBeansProjects/Lexer/src/lexer/CallParser.java</file>
         </group>
     </open-files>

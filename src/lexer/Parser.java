@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package lexer;
 
 import java.util.ArrayList;
@@ -19,6 +15,7 @@ public class Parser {
     String nodeName;
     ArrayList<Token> tokens;
     HashMap<String, Node> createdNodes = new HashMap<>();
+    ArrayList<GraphNode> nodesList = new ArrayList<>();
     
     int tokenIndex;
 
@@ -236,15 +233,25 @@ public class Parser {
 
     }
 
+    //Checks if a "ID" is already created as a node if it is not
+    //then it creates a new node and adds to the hashmap
     private void addNode(String nodeName){
         
-        if(!(createdNodes.containsKey((nodeName))))
+        if(!(createdNodes.containsKey(nodeName)))
         {
           createdNodes.put(nodeName, new Node(nodeName));
           
         }
+        
+        if(!(nodeCheck(nodeName))){
+            nodesList.add(new GraphNode(nodeName));
+            
+        }
+        
     }
     
+    //Calls addNode for the ID's in the argument for node creation
+    //Adds the child node to the parent nodes Childe HashMap.
     private void addParentChild(String parent, String child){
         addNode(parent);
         addNode(child);
@@ -254,6 +261,31 @@ public class Parser {
             createdNodes.get(parent).children.put(child, createdNodes.get(child));
 //            createdNodes.get(parent).addChild(child, createdNodes.get(child));
         }
+        
+        getNode(parent).addChild(getNode(child));
+    }
+    
+    public boolean nodeCheck(String nodeName){
+     
+        for(GraphNode node: nodesList){
+            if(node.name.equals(nodeName))
+                return true;
+        }
+        return false;
+    }
+    
+    public GraphNode getNode(String nodeName){
+     
+        for(GraphNode node: nodesList){
+            if(node.name.equals(nodeName))
+                return node;
+        }
+        return null;
+    }
+    
+    private GraphNode getGraphNode(String s){
+        
+        return nodesList.get(nodesList.indexOf(s));
     }
     
     public void printNodes(){

@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package lexer;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -25,6 +24,16 @@ public class CallParser {
         Parser parser = new Parser();
         
        parser.parseInput();
-       parser.printNodes();
+//       parser.printNodes();
+       Graph g = new Graph(parser.nodesList);
+       Treewalker tree = new Treewalker();
+       GraphNode root = g.knownNodes.get(g.knownNodes.indexOf(g.getNode("main")));
+       tree.bfs(root);
+       System.out.println("\n");
+       tree.findFragements(g.knownNodes);
+       System.out.println("\n");
+       tree.findLeaves(g.knownNodes);
+//       tree.mostChildrenOutput(g.knownNodes);
+       
     }
 }
